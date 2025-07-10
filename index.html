@@ -11,33 +11,23 @@ html {
 
 html,
 	<script>
-document.addEventListener("DOMContentLoaded", function () {
-  const nestedLists = document.querySelectorAll("li > ul, li > ol");
+document.addEventListener("DOMContentLoaded", () => {
+  // Sélectionne tous les <details> (y compris ceux de Notion)
+  const toggles = document.querySelectorAll("details");
 
-  nestedLists.forEach(function (list) {
-    list.style.display = "none";
+  toggles.forEach(details => {
+    details.removeAttribute("open"); // replie tout à l'ouverture
 
-    const parent = list.parentElement;
-    parent.style.cursor = "pointer";
+    // Change le curseur du résumé pour indiquer qu'on peut cliquer
+    const summary = details.querySelector("summary");
+    if (summary) {
+      summary.style.cursor = "pointer";
 
-    const indicator = document.createElement("span");
-    indicator.textContent = " [+] ";
-    indicator.style.fontWeight = "bold";
-    parent.insertBefore(indicator, parent.firstChild);
-
-    parent.addEventListener("click", function (e) {
-      if (e.target.tagName.toLowerCase() === "a") return;
-
-      if (list.style.display === "none") {
-        list.style.display = "block";
-        indicator.textContent = " [−] ";
-      } else {
-        list.style.display = "none";
-        indicator.textContent = " [+] ";
-      }
-
-      e.stopPropagation();
-    });
+      summary.addEventListener("click", e => {
+        e.preventDefault();            // empêche ouverture par défaut
+        details.open = !details.open; // bascule l'état ouvert/fermé
+      });
+    }
   });
 });
 </script>
