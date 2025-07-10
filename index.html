@@ -18,13 +18,13 @@ document.addEventListener("DOMContentLoaded", function () {
     details.removeAttribute("open"); // replie par défaut
 
     const summary = details.querySelector("summary");
-    if (summary) {
-      summary.style.cursor = "pointer";
-      summary.addEventListener("click", e => {
-        e.preventDefault();              // empêche l'ouverture automatique
-        details.open = !details.open;   // toggle ouverture/fermeture
-      });
-    }
+if (summary) {
+  summary.style.cursor = "pointer";
+  summary.addEventListener("click", e => {
+    e.preventDefault();              // empêche l'ouverture automatique
+    details.open = !details.open;   // bascule ouverture/fermeture
+  });
+}
   });
 
   // 2. Replier les sous-listes HTML (<ul>/<ol> dans <li>)
