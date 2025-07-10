@@ -10,6 +10,37 @@ html {
 }
 
 html,
+	<script>
+document.addEventListener("DOMContentLoaded", function () {
+  const nestedLists = document.querySelectorAll("li > ul, li > ol");
+
+  nestedLists.forEach(function (list) {
+    list.style.display = "none";
+
+    const parent = list.parentElement;
+    parent.style.cursor = "pointer";
+
+    const indicator = document.createElement("span");
+    indicator.textContent = " [+] ";
+    indicator.style.fontWeight = "bold";
+    parent.insertBefore(indicator, parent.firstChild);
+
+    parent.addEventListener("click", function (e) {
+      if (e.target.tagName.toLowerCase() === "a") return;
+
+      if (list.style.display === "none") {
+        list.style.display = "block";
+        indicator.textContent = " [−] ";
+      } else {
+        list.style.display = "none";
+        indicator.textContent = " [+] ";
+      }
+
+      e.stopPropagation();
+    });
+  });
+});
+</script>
 body {
 	margin: 0;
 	padding: 0;
