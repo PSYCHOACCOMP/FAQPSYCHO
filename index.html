@@ -11,23 +11,42 @@ html {
 
 html,
 	<script>
-document.addEventListener("DOMContentLoaded", () => {
-  // Sélectionne tous les <details> (y compris ceux de Notion)
+document.addEventListener("DOMContentLoaded", function () {
+  // 1. Replier les <details> au chargement
   const toggles = document.querySelectorAll("details");
-
   toggles.forEach(details => {
-    details.removeAttribute("open"); // replie tout à l'ouverture
-
-    // Change le curseur du résumé pour indiquer qu'on peut cliquer
+    details.removeAttribute("open"); // replie au départ
     const summary = details.querySelector("summary");
     if (summary) {
       summary.style.cursor = "pointer";
-
       summary.addEventListener("click", e => {
-        e.preventDefault();            // empêche ouverture par défaut
-        details.open = !details.open; // bascule l'état ouvert/fermé
+        e.preventDefault(); // empêche comportement par défaut
+        details.open = !details.open;
       });
     }
+  });
+
+  // 2. Rendre les listes (<li><ul>) repliables (si utilisées)
+  const nestedLists = document.querySelectorAll("li > ul, li > ol");
+  nestedLists.forEach(function (list) {
+    list.style.display = "none";
+    const parent = list.parentElement;
+    parent.style.cursor = "pointer";
+    const indicator = document.createElement("span");
+    indicator.textContent = " [+] ";
+    indicator.style.fontWeight = "bold";
+    parent.insertBefore(indicator, parent.firstChild);
+    parent.addEventListener("click", function (e) {
+      if (e.target.tagName.toLowerCase() === "a") return;
+      if (list.style.display === "none") {
+        list.style.display = "block";
+        indicator.textContent = " [−] ";
+      } else {
+        list.style.display = "none";
+        indicator.textContent = " [+] ";
+      }
+      e.stopPropagation();
+    });
   });
 });
 </script>
