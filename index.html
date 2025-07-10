@@ -10,6 +10,21 @@ html {
 }
 
 html,
+	<script>
+document.addEventListener("DOMContentLoaded", function () {
+  // Cible toutes les listes
+  const lists = document.querySelectorAll("ul, ol");
+  lists.forEach((list) => {
+    // Crée un bouton repliable
+    const wrapper = document.createElement("details");
+    const summary = document.createElement("summary");
+    summary.textContent = "Voir la liste";
+    list.parentNode.insertBefore(wrapper, list);
+    wrapper.appendChild(summary);
+    wrapper.appendChild(list);
+  });
+});
+</script>
 body {
 	margin: 0;
 	padding: 0;
