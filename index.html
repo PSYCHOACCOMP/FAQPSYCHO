@@ -10,51 +10,6 @@ html {
 }
 
 html,
-	<script>
-document.addEventListener("DOMContentLoaded", function () {
-  // 1. Replier tous les <details> à l'ouverture
-  const toggles = document.querySelectorAll("details");
-  toggles.forEach(details => {
-    details.removeAttribute("open"); // replie par défaut
-
-    const summary = details.querySelector("summary");
-if (summary) {
-  summary.style.cursor = "pointer";
-  summary.addEventListener("click", e => {
-    e.preventDefault();              // empêche l'ouverture automatique
-    details.open = !details.open;   // bascule ouverture/fermeture
-  });
-}
-
-
-  // 2. Replier les sous-listes HTML (<ul>/<ol> dans <li>)
-  const nestedLists = document.querySelectorAll("li > ul, li > ol");
-  nestedLists.forEach(function (list) {
-    list.style.display = "none";
-    const parent = list.parentElement;
-    parent.style.cursor = "pointer";
-
-    const indicator = document.createElement("span");
-    indicator.textContent = " [+] ";
-    indicator.style.fontWeight = "bold";
-    parent.insertBefore(indicator, parent.firstChild);
-
-    parent.addEventListener("click", function (e) {
-      if (e.target.tagName.toLowerCase() === "a") return;
-
-      if (list.style.display === "none") {
-        list.style.display = "block";
-        indicator.textContent = " [−] ";
-      } else {
-        list.style.display = "none";
-        indicator.textContent = " [+] ";
-      }
-
-      e.stopPropagation();
-    });
-  });
-});
-</script>
 body {
 	margin: 0;
 	padding: 0;
