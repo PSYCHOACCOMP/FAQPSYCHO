@@ -21,8 +21,8 @@ document.addEventListener("DOMContentLoaded", function () {
     if (summary) {
       summary.style.cursor = "pointer";
       summary.addEventListener("click", e => {
-        e.preventDefault(); // bloque l'ouverture automatique
-        details.open = !details.open; // toggle ouverture
+        e.preventDefault();              // empêche l'ouverture automatique
+        details.open = !details.open;   // toggle ouverture/fermeture
       });
     }
   });
